@@ -1,7 +1,7 @@
-# Robust Prompt Learning for Vision-Language Models
+# Robust Multi-modal Prompt Learning for Vision-Language Models
 
 ## Introduction
-This repo contains some experiments on CoOP to research the robustness of GCE about adapting vision-language models like [CLIP](https://arxiv.org/abs/2103.00020) to downstream datasets via *prompt learning*.
+This repo contains some experiments on CoOP, MaPLe to research the robustness of GCE about adapting vision-language models like [CLIP](https://arxiv.org/abs/2103.00020) to downstream datasets via *prompt learning*.
 
 ## How to Install
 + Setup conda environment:
@@ -42,16 +42,16 @@ conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch
 # Set up the Dassl library (No need to rebuild even if the source code changes)
 python setup.py develop
 ```
-+ Install the RCoOP
++ Install the RMaPLe
 ```bash
-############ RCoOP Installation ############
+############ RMaPLe Installation ############
 
 # Navigate back to the parent directory
 cd ..
 
-# Clone the RCoOP repository
-git clone https://github.com/LZHMS/RCoOP.git
-cd RCoOP/
+# Clone the RMaPLe repository
+git clone https://github.com/LZHMS/RMaPLe.git
+cd RMaPLe/
 
 # Install necessary packages for CLIP
 pip install -r requirements.txt
@@ -69,9 +69,12 @@ ln -s ${your_dassl_path} ./dassl
 
 Please follow [CoOp Datasets Instructions](https://github.com/KaiyangZhou/CoOp/blob/main/DATASETS.md) to install the datasets.
 
+## Model Structure
+<img src="https://cdn.jsdelivr.net/gh/LZHMS/picx-images-hosting@master/EBlog/Paper/WorkFlow.231mf5t682.webp" alt="WorkFlow" />
+
 ## How to Run
 
-Please follow [RCOOP Instructions](RCOOP.md) to see the detailed instructions on how to run the code to reproduce the results.
+Please follow [RMaPLe Instructions](RMAPLE.md) to see the detailed instructions on how to run the code to reproduce the results.
 
 ## Results
 ### Combination Between CoOP and GCE					
@@ -95,6 +98,13 @@ Please follow [RCOOP Instructions](RCOOP.md) to see the detailed instructions on
 |Caltech-101|VT16|CoOP(+GCE)|**95.80**|**95.47**|**95.47**|**95.47**|
 |Caltech-101|VT16|RCoOP(CLS+GCE)|95.23|92.43|92.43|92.43|
 
+### Comparation Between MaPLe and RMaPLe
+|Dataset| Method|Noise Rate|Noise Rate|Noise Rate|Noise Rate|
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+|Dtd|MaPLe|70.70|62.93|55.43|39.73|
+|Dtd|MaPLe+GCE|**71.53**|**69.63**|**67.77**|59.33|
+|Dtd|RMaPLe|69.20|66.93|64.87|55.90|
+|Dtd|RMaPLe+GCE|68.47|68.83|66.90|**61.10**|
 
 ### Raw Materials
 Model traning logs can be found in the `log.txt` under each experiment directory.
@@ -106,6 +116,7 @@ Parsing results can be found in the following files:
 + [CoOP VT16_EP50_16SHOTS ON Dtd](./output/dtd/CoOp/vit_b16_ep50_16shots/parse_results.txt)
 
 ## Conclusions
+### CoOP and RCoOP
 The factors influencing robustness in prompt learning within Visual-Language Models(VLMs), as well as directions for improvement, can be inferred from the experiments above:
 
 + Loss Function
@@ -116,6 +127,9 @@ From the experiments, it is evident that the transfer performance of the `dtd` d
 
 + Backbone
 From the results, it can be analyzed that the ViT-B/16 architecture consistently achieves higher accuracy compared to ResNet50 when used as the backbone visual encoder. This suggests that the ViT-B/16 structure helps to resist label noise and enhance the robustness of the model.
+
+### MaPLe and RMaPLe
+
 
 ## References
 + [CoOp](https://github.com/KaiyangZhou/CoOp)

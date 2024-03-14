@@ -137,6 +137,8 @@ class MultiModalPromptLearner(nn.Module):
         # Linear layer so that the tokens will project to 512 and will be initialized from 768
         self.proj = nn.Linear(ctx_dim, 768)
         self.proj.half()
+        self.weightNet = nn.Linear(13, n_cls, bias=False)
+        self.weightNet.half()
         self.ctx = nn.Parameter(ctx_vectors)
         # These below parameters related to the shared prompts
         # Define the compound prompts for the deeper layers
@@ -236,6 +238,7 @@ class CustomCLIP(nn.Module):
         # logits = logit_scale * image_features @ text_features.t()
 
         # calculate multi-level loss
+        '''
         logits_sum = 0
         for text_f, image_f in zip(text_layers_features, image_layers_features):
             text_f = text_f / text_f.norm(dim=-1, keepdim=True)
@@ -243,14 +246,29 @@ class CustomCLIP(nn.Module):
             logits_sum += logit_scale * image_f @ text_f.t()
         
         logits_aver = logits_sum / len(text_layers_features)
+        '''
+        #print(f"len tfeatures: {len(text_layers_features)}; len vfeatures: {len(image_layers_features)}")
+        #print(f"telement shape: {text_layers_features[0].shape}; velement shape: {image_layers_features[0].shape}")
+        logits_sum = []
+        for text_f, image_f in zip(text_layers_features, image_layers_features):
+            text_f = text_f / text_f.norm(dim=-1, keepdim=True)
+            image_f = image_f / image_f.norm(dim=-1, keepdim=True)
+            #print(f"text_f shape: {text_f.shape}; image_f shape: {image_f.shape}")
+            #print(f"logit_scale shape: {logit_scale.shape}")
+            logits_sum.append(logit_scale * image_f @ text_f.t())
+
+        logits_sum = torch.stack(logits_sum, dim=2)
+        #print(f"loggits_sum shape: {logits_sum.shape}")
+        logits, _ = torch.max(self.prompt_learner.weightNet(logits_sum), dim=2)
+        #print(f"loggits shape: {logits.shape}")
 
         if self.prompt_learner.training:
             if self.USE_ROBUSTLOSS:
-                return self.GCE_loss(logits_aver, label)
+                return self.GCE_loss(logits, label)
             else:
-                return F.cross_entropy(logits_aver, label)
+                return F.cross_entropy(logits, label)
             
-        return logits_aver
+        return logits
 
 
 def _get_clones(module, N):
