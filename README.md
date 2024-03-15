@@ -106,6 +106,7 @@ Please follow [RMaPLe Instructions](RMAPLE.md) to see the detailed instructions 
 |Dtd|RMaPLe|69.20|66.93|64.87|55.90|
 |Dtd|RMaPLe+GCE|68.47|68.83|66.90|**61.10**|
 
+
 ### Raw Materials
 Model traning logs can be found in the `log.txt` under each experiment directory.
 
@@ -114,6 +115,9 @@ Parsing results can be found in the following files:
 + [CoOP VT16_EP50_16SHOTS ON Caltech-101](./output/caltech101/CoOp/vit_b16_ep50_16shots/parse_results.txt)
 + [CoOP RN50_EP50_16SHOTS ON Dtd](./output/dtd/CoOp/rn50_ep50_16shots/parse_results.txt)
 + [CoOP VT16_EP50_16SHOTS ON Dtd](./output/dtd/CoOp/vit_b16_ep50_16shots/parse_results.txt)
++ [MaPLe VT16_EP50_16SHOTS ON Dtd](./output/dtd/MaPLe/vit_b16_c2_ep50_batch4_16shots/parse_results.txt)
++ [RMaPLe VT16_EP50_16SHOTS ON Dtd](./output/dtd/RMaPLe/vit_b16_c2_ep50_batch4_16shots/parse_results.txt)
+
 
 ## Conclusions
 ### CoOP and RCoOP
@@ -129,7 +133,9 @@ From the experiments, it is evident that the transfer performance of the `dtd` d
 From the results, it can be analyzed that the ViT-B/16 architecture consistently achieves higher accuracy compared to ResNet50 when used as the backbone visual encoder. This suggests that the ViT-B/16 structure helps to resist label noise and enhance the robustness of the model.
 
 ### MaPLe and RMaPLe
-
+Based on the experimental results of CoOP and RCoOP, we further optimize the loss function design and adopt unified curriculum learning. We conduct experiments using ViT16 as the backbone network and derive corresponding conclusions:
++ Comparing the experimental results above, our improved RMaPLe shows significantly greater improvement over MaPLe at different noise ratios, indicating its stronger noise robustness;
++ Additionally, further experimentation reveals that the incorporation of the GCE loss function leads to significant improvements in both cases. However, MaPLe seems to perform better in low-noise scenarios, while RMaPLe demonstrates the ability to withstand more severe noise.
 
 ## References
 + [CoOp](https://github.com/KaiyangZhou/CoOp)

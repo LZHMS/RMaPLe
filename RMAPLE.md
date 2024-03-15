@@ -1,25 +1,32 @@
 ## How to Run
 ### Training Script
-The training script for model is provided in `scripts/rcoop` which allow you to reproduce the experiments.
+The training script for model is provided in `scripts/setup/` which allow you to reproduce the experiments.
 
 To run it, you need to config the path in `DATA` to your data root.
 
 ### Parsing Results Script
-In order to analyze each experiment's results, you can ultilize the `scripts/rcoop/parse_results.sh` to automaically get the accracy by passing each experiment's parameters.
+In order to analyze each experiment's results, you can ultilize the `parse_results.sh` to automaically get the accracy by passing each experiment's parameters.
 
-### Experimental Scripts
-We split the whole experiments into two tasks running on two GPUs. The `exp_cuda0.sh` conducts experiments on the `caltech-101` dataset and `exp_cuda1.sh` conducts experiments on the `dtd` dataset.
+### Setup Script
+We combine model training and results parsing into a unified setup script. There scripts can be found in the folder of `scrpts/setup`:
++ `exp_coop.sh`: the script to run `exp_coop_dataset.sh` achieving device and dataset control;
++ `exp_maple.sh`: the script to run the MaPLe model on a specific device and dataset
++ `exp_rmaple.sh`: the script to run the RMaPLe model on a specific device and dataset
 
-And after that we can only use two commmands to run the RCoOp.
+And after that we can only use two commmands to run the models.
 
 ```bash
-# cuda0
-bash scripts/exp_cuda0.sh
-#cuda1
-bash scripts/exp_cuda1.sh
+# coop
+bash scripts/setup/exp_coop.sh
+
+# maple
+bash scripts/setup/exp_maples.sh
+
+# rmaple
+bash scripts/setup/exp_rmaples.sh
 ```
 
-After the experiments are finished, you can get the structure of `output/` is
+After the experiments are finished, you can get the structure of `output/` is (just take CoOP as an example)
 
 ```
 output
@@ -102,7 +109,7 @@ output
 ...
 ```
 
-In the `parse_results.txt`, you will get all results about the experinments:
+In the `parse_results.txt`, you will get all results about the experinments like:
 ```bash
 Parsing files in output/caltech101/CoOp/rn50_ep50_16shots/nctx16_cscFalse_ctpend/GCE_False/16shots_0noise/
 file: output/caltech101/CoOp/rn50_ep50_16shots/nctx16_cscFalse_ctpend/GCE_False/16shots_0noise/seed1/log.txt. accuracy: 92.00%. 

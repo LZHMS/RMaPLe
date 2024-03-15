@@ -41,7 +41,7 @@ class Caltech101(DatasetBase):
         if num_shots >= 1:
             seed = cfg.SEED
             if num_fp >= 1:        # using noisy dataset
-                preprocessed = os.path.join(self.split_noisy_fewshot_dir, f"shot_{num_shots}-seed_{seed}.pkl")
+                preprocessed = os.path.join(self.split_noisy_fewshot_dir, f"shot_{num_shots}-numfp_{num_fp}-seed_{seed}.pkl")
 
                 if os.path.exists(preprocessed):
                     print(f"Loading preprocessed noisy few-shot data from {preprocessed}")
