@@ -83,20 +83,20 @@ Please follow [RMaPLe Instructions](RMAPLE.md) to see the detailed instructions 
 ||||0| 12.5|25	|50|
 |Dtd|RN50|CoOP|63.13|59.40|54.83|44.80| 
 |Dtd|RN50|CoOP(CLS)|63.87|57.17 |	49.77 |	33.63|
-|Dtd |RN50| CoOP(+GCE)	|62.87 |	60.80 |	**61.13** |	**56.27**| 
-|Dtd|RN50	|RCoOP(CLS+GCE)	|**63.67** |	**61.90** |	58.37 	|46.30|
+|Dtd |RN50|RCoOP(+GCE)	|62.87 |	60.80 |	**61.13** |	**56.27**| 
+|Dtd|RN50|CoOP(CLS+GCE)	|**63.67** |	**61.90** |	58.37 	|46.30|
 |Dtd|VT16|CoOP|69.27|63.73|60.53|48.77| 
 |Dtd|VT16|CoOP(CLS)|69.20|61.47 |	54.47 |	36.97|
-|Dtd |VT16| CoOP(+GCE)	|**70.07** |	**67.93**|	**67.50** |	**61.50**| 
-|Dtd|VT16|RCoOP(CLS+GCE)	|68.30|	66.87 |	64.00 	|52.50|
-|Caltech-101|RN50|CoOP|92.00|85.83|85.87|85.83|
-|Caltech-101|RN50|CoOP(CLS)|91.37|76.80|76.93|76.93|
-|Caltech-101|RN50|CoOP(+GCE)|**92.20**|**91.57**|**91.67**|**91.57**|
-|Caltech-101|RN50|RCoOP(CLS+GCE)|91.53|89.90|89.87|89.87|
-|Caltech-101|VT16|CoOP|95.70|92.43|92.43|92.43|
-|Caltech-101|VT16|CoOP(CLS)|94.80|81.50|81.50|81.50|
-|Caltech-101|VT16|CoOP(+GCE)|**95.80**|**95.47**|**95.47**|**95.47**|
-|Caltech-101|VT16|RCoOP(CLS+GCE)|95.23|92.43|92.43|92.43|
+|Dtd |VT16|RCoOP(+GCE)	|**70.07** |	**67.93**|	**67.50** |	**61.50**| 
+|Dtd|VT16|CoOP(CLS+GCE)	|68.30|	66.87 |	64.00 	|52.50|
+|Caltech-101|RN50|CoOP|91.93|86.40|83.17|76.80|
+|Caltech-101|RN50|CoOP(CLS)|91.37|76.93|65.87|46.07|
+|Caltech-101|RN50|RCoOP(+GCE)|**92.03**|**91.53**|**91.43**|**87.83**|
+|Caltech-101|RN50|CoOP(CLS+GCE)|91.53|89.87|84.37|69.90|
+|Caltech-101|VT16|CoOP|95.70|92.43|89.70|84.67|
+|Caltech-101|VT16|CoOP(CLS)|94.80|81.50|71.73|52.63|
+|Caltech-101|VT16|RCoOP(+GCE)|**95.80**|**95.47**|**95.63**|**91.43**|
+|Caltech-101|VT16|CoOP(CLS+GCE)|95.23|92.43|88.40|73.80|
 
 ### Comparation Between MaPLe and RMaPLe
 |Dataset| Method|Noise Rate|Noise Rate|Noise Rate|Noise Rate|
